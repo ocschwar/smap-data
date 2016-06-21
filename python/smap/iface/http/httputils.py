@@ -73,8 +73,8 @@ def load_http(url, cache=False, auth=None, data=None, as_fp=False, verbose=False
                 data = pagefp.read()
                 pagefp.close();
                 return data
-        except Exception, e:
-            print e
+        except Exception as e:
+            print (e)
             return None
 
         if cache and not data:

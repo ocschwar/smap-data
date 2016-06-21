@@ -126,7 +126,7 @@ contain a ``uuid`` key to set the root identifier for the source.
         found = path
     if not found:
       raise Exception("Config file %s not found." % file)
-    print "Loading config file:", found
+    print ("Loading config file:", found)
 
     conf = configobj.ConfigObj(found, indent_type='  ')
 
@@ -143,7 +143,7 @@ contain a ``uuid`` key to set the root identifier for the source.
     reports = []
 
     for s in conf:
-        print "Loading section", s
+        print ("Loading section", s)
         if s.startswith('report'):
             resource = conf[s].get('ReportResource', '/+')
             format = conf[s].get('Format', 'json')
@@ -176,7 +176,7 @@ contain a ``uuid`` key to set the root identifier for the source.
             # path sections must start with a '/'
             # other sections might be present and could be parsed by
             # other parts of the program
-            print "Warning: skipping section", s, "since it does not begin with a '/'"
+            print ("Warning: skipping section", s, "since it does not begin with a '/'")
             continue
         elif len(sections) and not util.norm_path(s) in sections: 
             # skip all but the listed sections if we were asked to

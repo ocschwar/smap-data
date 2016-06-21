@@ -74,7 +74,7 @@ class InstanceResource(resource.Resource):
         # assemble the results
         try:
             obj = self.inst.lookup(util.join_path(request.postpath))
-        except Exception, e:
+        except Exception as e:
             setResponseCode(request, exception, 500)
             request.finish()
 
@@ -162,7 +162,7 @@ class ReportingInstanceResource(resource.Resource):
             if not self.reports.update_report(obj):
                 self.reports.add_report(obj)
                 request.setResponseCode(201) # created
-        except Exception, e:
+        except Exception as e:
             setResponseCode(request, e, 400)
             request.setHeader('Content-type', 'text/plain')
             request.write(str(e))
@@ -211,7 +211,7 @@ class ReportingResource(resource.Resource):
             obj = read_report(self, request)
             self.reports.add_report(obj)
             request.setResponseCode(201)
-        except Exception, e:
+        except Exception as e:
             request.setHeader('Content-type', 'text/plain')
             setResponseCode(request, e, 400)
             request.write(str(e))
@@ -264,8 +264,8 @@ def run(inst, port=None, logdir=None):
     if not logdir: logdir = smapconf.SERVER.get('logdir', os.getcwd())
     if not os.path.exists(logdir):
         os.makedirs(logdir)
-    print "Logging to", logdir
-    print "Starting server on port", port    
+    print ("Logging to %s"% logdir)
+    print ("Starting server on port %s"% port)    
     # Allow 50 1MB files
     observer = log.FileLogObserver(LogFile('sMAP.log', logdir, rotateLength=1000000, maxRotatedFiles=50))
     log.startLogging(observer)

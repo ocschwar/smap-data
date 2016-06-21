@@ -136,7 +136,7 @@ the result.
                                  data=q, 
                                  timeout=self.timeout)
             rv = parser(fp.read())
-        except urllib2.HTTPError, err:
+        except urllib2.HTTPError as err:
             log.err("Bad request running query: ""%s"" " % q)
             raise SmapException("Archiver query HTTP request error %s" % err.code)
         fp.close()
@@ -366,7 +366,7 @@ programs.  For instance::
                     self.client.datacb(uuids, data)
             except:
                 log.err()
-                print line
+                print( line)
 
         def connectionLost(self, reason):
             self.client._failed()

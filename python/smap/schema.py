@@ -170,7 +170,7 @@ def load_report(data):
     v = dreader.read(io.BinaryDecoder(input))
     map(stringify_uuids, v.itervalues())
     remove_none(v)
-    print v
+    print (v)
     return v
 
 

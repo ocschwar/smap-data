@@ -216,7 +216,7 @@ def pickle_load(filename):
 
     try:
         return pickle.load(fp)
-    except (IOError, EOFError, pickle.PickleError), e:
+    except (IOError, EOFError, pickle.PickleError) as e:
         return None
     finally:
         fp.close()
@@ -230,12 +230,12 @@ def pickle_dump(filename, obj):
 
     try:
         fp = open(filename + '.tmp', 'wb')
-    except IOError, e:
+    except IOError as e:
         return
 
     try:
         pickle.dump(obj, fp, protocol=2)
-    except pickle.PickleError, TypeError:
+    except (pickle.PickleError, TypeError):
         log.err()
     finally:
         os.fsync(fp)
@@ -244,13 +244,13 @@ def pickle_dump(filename, obj):
     try:
         # move it atomically if we were able to pickle the object
         os.rename(filename + '.tmp', filename)
-    except OSError, e:
+    except OSError as e:
         # Windows versions prior to Vista don't support atomic renames
         if e.errno != errno.EEXIST:
             raise
         os.remove(filename)
         os.rename(filename + '.tmp', filename)
-    except IOError, e:
+    except IOError as e:
         pass
 
 def periodicCallInThread(fn, *args):

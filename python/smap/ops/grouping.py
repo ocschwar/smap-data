@@ -624,7 +624,7 @@ class VectorizeOperator(Operator):
         self.block_streaming = reduce(operator.__or__, 
                                       (op.block_streaming for op in self.ops), 
                                       False)
-        print "blocking", self.block_streaming
+        print ("blocking", self.block_streaming)
         Operator.__init__(self, inputs, 
                           util.flatten(map(operator.attrgetter('outputs'), 
                                            self.ops)))

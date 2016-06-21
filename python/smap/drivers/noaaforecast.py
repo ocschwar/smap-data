@@ -92,7 +92,7 @@ class NOAAForecast(SmapDriver):
     for retry_time in [0, 30, 5*60]:
       time.sleep(retry_time)
       try:
-        print "Reading"
+        print( "Reading")
         data = urllib2.urlopen(self.url, timeout = 30).read()
         times = {}
 
@@ -124,6 +124,6 @@ class NOAAForecast(SmapDriver):
                 self.add('/'+name, int(t), v)
               break
         return
-      except Exception, e:
-        print e
+      except Exception as e:
+        print( e)
       # Error occured retry

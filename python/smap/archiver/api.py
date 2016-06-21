@@ -250,7 +250,8 @@ class Api(resource.Resource):
         
         request.finish()
 
-    def send_data_reply(self, (request, result)):
+    def send_data_reply(self, req_rep):
+        (request, result) = req_rep
         """After reading back some data, format it and send it to the client
         """
         if not 'format' in request.args or 'json' in request.args['format']:
@@ -277,7 +278,8 @@ class Api(resource.Resource):
             request.setResponseCode(400)
             request.finish()
 
-    def send_reply(self, (request, result)):
+    def send_reply(self, req_rep):
+        (request, result) = req_rep
         """Send a generic json reply.
         """
         if not 'callback' in request.args:
@@ -291,7 +293,7 @@ class Api(resource.Resource):
             request.write(json.dumps(result))
             request.finish()
             return server.NOT_DONE_YET
-        except Exception, e:
+        except Exception as e:
             log.err()
             raise
 
@@ -303,7 +305,7 @@ class Api(resource.Resource):
             request.write(');')
             request.finish()
             return server.NOT_DONE_YET
-        except Exception, e:
+        except Exception as e:
             log.err()
             raise
 
@@ -340,7 +342,7 @@ class Api(resource.Resource):
         try: 
             # run the query locally
             d = parser.runquery(self.db, query)
-        except Exception, e:
+        except Exception as e:
             log.err("Failing query: " + str(query))
             log.err()
             setResponseCode(request, e, 400)

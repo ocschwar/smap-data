@@ -145,13 +145,13 @@ def t_NUMBER(t):
         try:
             t.value = float(t.value)
         except ValueError:
-            print "Invalid floating point number", t.value
+            print( "Invalid floating point number", t.value)
             t.value = 0
     else:
         try:
             t.value = int(t.value)
         except ValueError:
-            print "Integer value too large %d", t.value
+            print( "Integer value too large %d", t.value)
             t.value = 0
         
     return t
@@ -254,7 +254,7 @@ def p_query(t):
 
     elif t[1] == 'set':
         #  set tags 
-        new_tags = ' || '.join(map(lambda (t,v): "hstore(%s, %s)" % 
+        new_tags = ' || '.join(map(lambda t,v: "hstore(%s, %s)" % 
                                    (escape_string(t), escape_string(v)),
                                t[2]))
         q = "UPDATE stream SET metadata = metadata || " + new_tags + \
@@ -290,7 +290,7 @@ def p_apply_statement(t):
     """apply_statement  : formula_pipe TO data_clause WHERE statement
                         | formula_pipe TO data_clause WHERE statement GROUP BY tag_list
     """
-    print "Existing restrictions", t[5]
+    print( "Existing restrictions", t[5])
     restrict = add_formula_restrictions(t[5], t[1].restrict)
     tag_extractor, tag_query = make_select_rv(t, 
                                               make_tag_select('*'), 
@@ -301,7 +301,7 @@ def p_apply_statement(t):
     data_extractor = lambda x: x
     if len(t) > 7: group = t[8]
     else: group = None
-    print "Extra restrictions", t[1].restrict
+    print( "Extra restrictions", t[1].restrict)
     app = stream.OperatorApplicator(t[1].ast, t[3].dparams,
                                     t.parser.request, group=group)
     t[0] = ([app.start_processing, tag_extractor, data_extractor], 
@@ -787,7 +787,7 @@ class QueryParser:
             ext = [None, ext]
 
         if verbose: 
-            print q[1]
+            print( q[1])
         if not run: return defer.succeed([])
         
         deferreds = []
@@ -881,7 +881,7 @@ if __name__ == '__main__':
             try:
                 pprint.pprint(json.loads(data))
             except:
-                print data
+                print( data)
 
         def finish(self):
             pass

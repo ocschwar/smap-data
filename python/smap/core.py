@@ -485,7 +485,7 @@ sMAP reporting functionality."""
         """
         try:
             return self.get_timeseries(path).add(*args, **kwargs)
-        except exceptions.AttributeError, e:
+        except exceptions.AttributeError as e:
             raise SmapException("add failed: no such path: %s" % path)
 
     def _add_parents(self, path):
@@ -623,18 +623,18 @@ if __name__ == '__main__':
 
     t.add(util.now(), 12)
     t.add(util.now(), 13)
-    print s.get_timeseries(t['uuid'])
-    print s.get_timeseries('/sensor0')
-    print s.get_timeseries('/')
+    print( s.get_timeseries(t['uuid']))
+    print( s.get_timeseries('/sensor0'))
+    print( s.get_timeseries('/'))
 
 #    s.get_collection('/').set_metadata({'Extra' : {"foo": " bar"}})
-    print s.get_collection('/')
+    print( s.get_collection('/'))
 
 
-#     print "Finding all Timeseries under /"
-    print s._lookup_r('/', pred=ITimeseries.providedBy)
-    print s.lookup('/+Timeseries')
+#     print( "Finding all Timeseries under /")
+    print( s._lookup_r('/', pred=ITimeseries.providedBy))
+    print( s.lookup('/+Timeseries'))
 
-    print s._lookup_r('/', pred=lambda x: x.dirty)
+    print( s._lookup_r('/', pred=lambda x: x.dirty))
 
     # print s._lookup_r("/foo")

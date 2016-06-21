@@ -101,7 +101,7 @@ class StandardizeUnitsOperator(Operator):
         Operator.__init__(self, inputs, outputs)
 
     def process(self, data):
-        return util.flatten(map(lambda (c, d): c([d]), zip(self.converters, data)))
+        return util.flatten(map(lambda c, d: c([d]), zip(self.converters, data)))
 
 
 class NullOperator(Operator):
@@ -122,7 +122,7 @@ class PrintOperator(NullOperator):
     operator_name = 'print'
     operator_constructors = [()]
     def process(self, inputs):
-        print inputs
+        print (inputs)
         return inputs
 
 class SnapOperator(ParallelSimpleOperator):
@@ -208,7 +208,7 @@ class MissingDataOperator(ParallelSimpleOperator):
         length, width = data.shape
         width -= 1
         nancnt = np.sum(np.isnan(data[:, 1:]), axis=1)
-        print "invert?", invert
+        print ("invert? %s"% invert)
         if not invert:
             takerows = np.where(width - nancnt >= width * ndatathresh)
         else:

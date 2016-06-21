@@ -54,7 +54,7 @@ class SmapConsumer(resource.Resource):
     def add(self, report):
         try:
             util.push_metadata(report)
-        except Exception, e:
+        except Exception as e:
             traceback.print_exc()
         for path, val in report.iteritems():
             with open('data/' + path.replace('/', '-'), 'a') as fp:
@@ -62,9 +62,9 @@ class SmapConsumer(resource.Resource):
                 if len(readings) == 0: continue
                 val.pop('uuid')
                 for k, v in util.buildkv('', val):
-                    print >>fp, "# %s = %s" % (k[1:], v)
+                    print ( "# %s = %s" % (k[1:], v),file=fp)
                 for rv in readings:
-                    print >>fp, rv['ReadingTime'], rv['Reading']
+                    print (( rv['ReadingTime'], rv['Reading']),file=fp)
 
     isLeaf = True
     def render_POST(self, request):

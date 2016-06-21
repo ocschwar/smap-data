@@ -59,7 +59,7 @@ class BPADriver(SmapDriver):
 		
 	def read(self):
 		object_ = {}
-		print 'read running'
+		print ('read running')
 		try:
 			#get the text from the ur
 			wa = urllib2.urlopen('http://transmission.bpa.gov/business/operations/wind/baltwg.txt')
@@ -73,7 +73,7 @@ class BPADriver(SmapDriver):
 			object_["Load"] = data[-1].split()[2]
 		except Exception as e:
 			logging.exception(type(e))
-			print e
+			print (e)
 		else:
 			if currentTime != self.previousTime:
 				self.w.add(currentTime,int(object_["Wind"]))

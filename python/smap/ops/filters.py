@@ -160,7 +160,7 @@ class WhereOperator(operators.Operator):
         results = map(lambda x: pat.match(x.get(tag, '')), inputs)
         self.takes = [i for (i, elt) in enumerate(results) if elt]
         if len(self.takes) == 0:
-            print "WARNING: no points found:", self.name
+            print( "WARNING: no points found:", self.name)
         operators.Operator.__init__(self, inputs, 
                                     [inputs[i] for i in self.takes])
 

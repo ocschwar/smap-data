@@ -121,7 +121,7 @@ class ModbusDriver(SmapDriver):
                 self.m.close()
                 self.m = self.CLIENT(self.host, self.port, self.slaveaddr)
                 return
-            except Exception, e:
+            except Exception as e:
                 log.err("Exception polling PQube meter at (%s:%i): %s" % 
                         (self.host, self.port, str(e)))
                 return

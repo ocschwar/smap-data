@@ -99,7 +99,7 @@ if __name__ == '__main__':
     # look at all the meters hanging off each of them
     for location in devices.iterkeys():
         if opts.progress:
-            print >>sys.stderr, "Processing", location
+            print( "Processing", location, file=sys.stderr)
         soup = load_html(BMOROOT + devices[location]['href'], auth=AUTH, cache=opts.cache)
         subdevices = []
         for tr in soup.findAll('tr'):
@@ -122,10 +122,10 @@ if __name__ == '__main__':
                 mtypes[t['type']]['count'] = mtypes[t['type']]['count'] + 1
                 mtypes[t['type']]['locs'].append(name)
         for n, c in mtypes.iteritems():
-            print >>sys.stderr, c['count'], n, ' '.join(c['locs'])
+            print( c['count'], n, ' '.join(c['locs']),file=sys.stderr)
 
     if opts.buildings:
-        print >>sys.stderr, '\n'.join(devices.iterkeys())
+        print( '\n'.join(devices.iterkeys()), file = sys.stderr)
 
 if opts.conf:
     def make_section(cmps):
@@ -236,6 +236,6 @@ elif opts.load:
 #                 print '/' + obvius.to_pathname(k) + '/' + obvius.to_pathname(v.keys()[0]) + ',' + k
 
 elif opts.db:
-    print "generate sensordb"
+    print( "generate sensordb")
     for location, devs in devices.iteritems():
-        print devs
+        print( devs)

@@ -128,7 +128,8 @@ class VerisMeter:
     def scale_vals(self, vals, scale):
         return map(lambda x,y: x*(10 ** y), vals, scale)
 
-    def read_reg_range(self, (start, end)):
+    def read_reg_range(self, interval):
+        (start, end) = interval
         start -= 1
         end -= 1
         if end < start: 
@@ -186,6 +187,6 @@ class VerisDriver(SmapDriver):
             self.update_field('power', power)
             energy = self.veris.get_energy()
             self.update_field('energy', energy)
-        except Exception, e:
+        except Exception as e:
             logging.error("Exception updating readings: " + str(e))
 

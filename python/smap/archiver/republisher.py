@@ -73,7 +73,7 @@ class ReResource(resource.Resource):
         query = "select distinct uuid where (%s)" % request.content.read() 
         try:
             d = parser.runquery(self.db, query)
-        except SmapException, e:
+        except SmapException as e:
             setResponseCode(request, e, 400)
             return "query: %s\nerror: %s\n" % (query, str(e))
         else:

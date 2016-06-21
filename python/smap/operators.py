@@ -328,7 +328,7 @@ class OperatorDriver(driver.SmapDriver):
         else:
             d.addCallback(self.load_crossection)
         def err(e):
-            print e
+            print (e)
         d.addErrback(err)
 
         return d
@@ -489,7 +489,7 @@ class VectorOperator(Operator):
         initargs['axis'] = self.axis
         self.name = "%s(%s)" % (self.name, 
                                 ",".join(list(map(str, opargs)) +
-                                         map(lambda (k, v): str(k) + "=" + str(v), 
+                                         map(lambda k, v: str(k) + "=" + str(v), 
                                              initargs.iteritems())))
 
         # if we operate in parallel then we also produce n output

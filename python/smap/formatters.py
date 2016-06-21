@@ -86,7 +86,7 @@ class GzipJson(StaticProducer):
     def __init__(self, value):
         value = dumps(value)
         self._value = zlib.compress(value)
-        print "%i -> %i" % (len(value), len(self._value))
+        print( "%i -> %i" % (len(value), len(self._value)))
         self.length = len(self._value)
 
 class GzipAvro(StaticProducer):
@@ -97,8 +97,8 @@ class GzipAvro(StaticProducer):
         json = dumps(value)
         avro = schema.dump_report(value)
         self._value = zlib.compress(avro)
-        print "json: %i gzip-json: %i avro: %i gzip-avro: %i" % (
-            len(json), len(zlib.compress(json)), len(avro), len(self._value))
+        print ("json: %i gzip-json: %i avro: %i gzip-avro: %i" % (
+            len(json), len(zlib.compress(json)), len(avro), len(self._value)))
         self.length = len(self._value)
 
 class AsyncSmapToCsv(AsyncFormatter):

@@ -48,7 +48,7 @@ MAYBEFLOATPAT = r'^(-?\d+(\.\d+)?)'
 
 MAYBEFLOATPAT is a regular expression which will match either an
 integer or a floating point number; a lot of things seemed to be
-printed this way.
+print(ed this way.)
 """
 DB = [
     {
@@ -441,7 +441,7 @@ unit_replace = [
     ]    
 
 def guess_conf(type, location, header):
-    print >>sys.stderr, "l", location, "t", type
+    print( "l", location, "t", type,file=sys.stderr)
     if type.startswith("Obvius, A8812"):
         conf = { "sensors" : [],  "meters" : [], "extra" : {"Rate": 300} }
         if header:
@@ -457,7 +457,7 @@ def guess_conf(type, location, header):
                             name.endswith("Max") or \
                             name.startswith("time"): 
                         continue
-                    print "%s ... %s ... %s" % (col, name, unit)
+                    print( "%s ... %s ... %s" % (col, name, unit))
                     conf["sensors"].append((col, MAYBEFLOATPAT, "", util.str_path(name), unit))
         return conf
 #     elif type.startswith("AcquiSuite 8811-1"):

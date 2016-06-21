@@ -69,7 +69,7 @@ def lookup_operator_by_name(name, args, kwargs):
         for proto in installed_ops[name].operator_constructors:
             if len(proto) != len(args): continue
             try:
-                alist = map(lambda (fn, a): fn(a), zip(proto, args))
+                alist = map(lambda fn, a: fn(a), zip(proto, args))
                 kwargs_ = kwargs
             except ValueError:
                 continue
@@ -104,7 +104,7 @@ class OperatorApplicator(object):
         self._paused = False
         try:
             return self.load_chunk()
-        except Exception, e:
+        except Exception as e:
             self.abort(failure.Failure(e))
 
     def stopProducing(self):
@@ -228,7 +228,8 @@ class OperatorApplicator(object):
                 self.consumer.unregisterProducer()
                 self.consumer.finish()
 
-    def build_result(self, (d, s)):
+    def build_result(self, d_s):
+        (d, s) = d_s
         obj = dict(s)
         if isinstance(d, np.ndarray):
             obj['Readings'] = d.tolist()

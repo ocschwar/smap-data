@@ -70,9 +70,9 @@ class ArchiverServiceMaker(object):
             import objgraph
             import gc
             def stats():
-                print gc.collect()
-                print
-                print '\n'.join(map(str, objgraph.most_common_types(limit=10)))
+                print (gc.collect())
+                print()
+                print( '\n'.join(map(str, objgraph.most_common_types(limit=10))))
             task.LoopingCall(stats).start(2)
 
         cp = adbapi.ConnectionPool(settings.conf['database']['module'],

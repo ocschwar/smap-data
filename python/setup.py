@@ -34,10 +34,10 @@ from distutils.core import setup, Extension
 
 # build modbus extension module
 modbus_module = Extension('smap.iface.modbus._TCPModbusClient',
-                          sources=map(lambda f: "smap/iface/modbus/" + f,
+                          sources=list(map(lambda f: "smap/iface/modbus/" + f,
                                       ["TCPModbusClient_wrap.c", "TCPModbusClient.c",
                                        "utility.c", "crc16.c", "DieWithError.c",
-                                       "HandleModbusTCPClient.c"]))
+                                       "HandleModbusTCPClient.c"])))
 
 setup(name="Smap",
       version="2.0.558",

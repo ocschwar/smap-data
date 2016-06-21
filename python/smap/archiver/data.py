@@ -53,7 +53,7 @@ import settings
 def makeErrback(request_):
     request = request_
     def errBack(outp):
-        print "ERRBACK:", outp
+        print( "ERRBACK:", outp)
         try:
             request.setResponseCode(500)
             request.finish()
@@ -302,7 +302,8 @@ class DataRequester:
         return rv
 
 
-def send_result((request, result)):
+def send_result(args):
+    (request, result) = args
     request.write(json.dumps(result))
     request.finish()
 

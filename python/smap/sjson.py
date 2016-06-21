@@ -42,8 +42,8 @@ try:
     import simplejson as json
 except ImportError:
     if sys.version_info < (2, 7):
-        print """WARNING: using json instead of simplejson: 
-   this will be much slower on python < 2.7"""
+        print ("""WARNING: using json instead of simplejson: 
+   this will be much slower on python < 2.7""")
     import json
 
 class SmapEncoder(json.JSONEncoder):
@@ -150,4 +150,4 @@ for i in xrange(0, 10000):
 from __main__ import dumps
 """
     t = timeit.Timer(stmt="dumps(obj)", setup=setup % 'json')
-    print '%s: %0.03f msec/pass (%s)' % ('smap-json', 1000 * t.timeit(number=N) / N, 'SpecialEncoder')
+    print( '%s: %0.03f msec/pass (%s)' % ('smap-json', 1000 * t.timeit(number=N) / N, 'SpecialEncoder'))

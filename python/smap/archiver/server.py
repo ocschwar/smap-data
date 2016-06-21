@@ -82,10 +82,10 @@ class DataResource(resource.Resource):
         d.addCallback(lambda x: self._check_subscriber(request, x))
 
         # if so, add the data
-        d.addCallback(lambda (subid, obj): self._add_data(subid, obj))
+        d.addCallback(lambda subid, obj: self._add_data(subid, obj))
         def add_success(x):
             if not x:
-                print x
+                print( x)
                 request.setResponseCode(500)
             request.finish()
         def add_error(x):
@@ -117,7 +117,7 @@ def getSite(db,
     if 'api' in resources:
         root.putChild('api', api.Api(db))
     if 'static' in resources:
-        print "static"
+        print( "static")
         root.putChild('static', static.File('static'))
     return server.Site(root)
 
